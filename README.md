@@ -1,1 +1,285 @@
-# Blessed9ra
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blessed 9ra | The Live Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Poppins:wght@400;600;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-green: #2e7d32;
+            --brand-orange: #ff6d00;
+            --honey: #ffc107;
+            --white: #ffffff;
+        }
+
+        /* Animated Shifting Background */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background: linear-gradient(-45deg, #fff8e1, #e8f5e9, #fff3e0, #f1f8e9);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #1a1a1a;
+            overflow-x: hidden;
+        }
+
+        /* Float Animation for Emojis */
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .floating-emoji {
+            position: fixed;
+            bottom: -50px;
+            font-size: 2rem;
+            z-index: -1;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        /* Header with Glow */
+        header { 
+            background: linear-gradient(135deg, #1b5e20, #2e7d32);
+            color: white; padding: 100px 20px; text-align: center;
+            border-bottom: 8px solid var(--honey);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        header h1 { 
+            font-family: 'Bungee', cursive; 
+            font-size: clamp(2.5rem, 8vw, 4.5rem); 
+            margin: 0; 
+            color: var(--honey);
+            text-shadow: 5px 5px 0 var(--brand-orange);
+            filter: drop-shadow(0 0 15px rgba(255, 193, 7, 0.5));
+        }
+
+        /* Lively Cards */
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        
+        .category-title { 
+            font-family: 'Bungee', cursive; font-size: 2.2rem; color: var(--brand-green); 
+            margin-bottom: 30px; text-align: center;
+            text-decoration: underline wavy var(--honey);
+        }
+
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        
+        .food-card { 
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(5px);
+            border-radius: 35px; padding: 30px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            display: flex; flex-direction: column; 
+            justify-content: space-between;
+            border: 3px solid transparent;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .food-card:hover { 
+            transform: translateY(-20px) scale(1.05) rotate(1deg); 
+            border-color: var(--brand-orange);
+            background: white;
+            box-shadow: 0 25px 50px rgba(255, 109, 0, 0.15);
+        }
+
+        .food-name { font-weight: 900; font-size: 1.4rem; margin-bottom: 10px; color: #333; }
+        .food-price { color: var(--brand-green); font-weight: 900; font-size: 1.5rem; margin-bottom: 20px; background: #e8f5e9; display: inline-block; padding: 5px 15px; border-radius: 50px; }
+
+        .btn-add { 
+            background: var(--brand-green); color: white; border: none; 
+            padding: 15px; border-radius: 20px; font-weight: 900; cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 8px 0 #1b5e20;
+        }
+
+        .btn-add:active { transform: translateY(4px); box-shadow: 0 4px 0 #1b5e20; }
+
+        /* Cart Pulse */
+        .cart-toggle { 
+            position: fixed; bottom: 30px; right: 30px; background: var(--brand-orange); 
+            color: white; padding: 25px 45px; border-radius: 100px; 
+            cursor: pointer; font-weight: 900; z-index: 2000; 
+            box-shadow: 0 10px 30px rgba(255, 109, 0, 0.4);
+            border: 4px solid var(--honey);
+        }
+
+        #cart-panel { 
+            position: fixed; top: 0; right: -450px; width: 420px; height: 100%; 
+            background: white; z-index: 3000; padding: 40px; 
+            transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            display: flex; flex-direction: column;
+        }
+        #cart-panel.active { right: 0; }
+
+        .btn-checkout { 
+            background: #25d366; color: white; border: none; width: 100%; 
+            padding: 22px; border-radius: 25px; font-weight: 900; font-size: 1.4rem; 
+            cursor: pointer; margin-top: 20px;
+        }
+
+        footer { background: #1b5e20; color: white; text-align: center; padding: 80px 20px; border-top: 15px solid var(--honey); }
+    </style>
+</head>
+<body>
+
+<div id="emoji-container"></div>
+
+<div class="cart-toggle" onclick="toggleCart()">🛒 MY FOOD TRAY (<span id="cart-count">0</span>)</div>
+
+<div id="cart-panel">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h2 style="font-family:'Bungee'; color:var(--brand-green); font-size:2rem;">TRAY</h2>
+        <button onclick="toggleCart()" style="border:none; background:none; font-size:3rem; cursor:pointer;">&times;</button>
+    </div>
+    <div id="cart-items" style="flex-grow:1; overflow-y:auto; margin: 30px 0;"></div>
+    <div style="border-top:8px solid var(--honey); padding-top:20px;">
+        <div style="display:flex; justify-content:space-between; font-weight:900; font-size:2rem;">
+            <span>TOTAL:</span><span>₦<span id="cart-total">0</span></span>
+        </div>
+        <button class="btn-checkout" onclick="sendOrder()">ORDER VIA WHATSAPP 🚀</button>
+    </div>
+</div>
+
+<header>
+    <h1>BLESSED 9RA</h1>
+    <p style="font-weight: 900; font-size: 1.3rem; letter-spacing: 2px;">THE TASTE OF PERFECTION • 24/7 LIVE KITCHEN</p>
+</header>
+
+<div class="container">
+    <div id="menu-sections"></div>
+</div>
+
+<footer>
+    <p style="font-weight:900; font-size:2rem; color:var(--honey); margin-bottom: 10px;">BLESSED 9RA DELICACIES</p>
+    <p>📍 Ilishan-Remo, Ogun State</p>
+    <p>📞 +234 816 854 3377 | +234 802 810 7074</p>
+</footer>
+
+<script>
+    const fullMenu = {
+        "The Staples 🌾": [
+            {n: "White Rice (Scoop) 🌾", p: 400}, {n: "Jollof Rice (Scoop) 🌾", p: 400}, 
+            {n: "Beans (Scoop) 🫘", p: 400}, {n: "Plantain 🌱", p: 500}
+        ],
+        "Swallow & Soups 🍛": [
+            {n: "Fufu 🍛", p: 400}, {n: "Amala 🍛", p: 400}, {n: "Poundo Yam 🍛", p: 400},
+            {n: "Egusi Soup (Scoop) 🍲", p: 600}, {n: "Efo Riro (Scoop) 🍲", p: 600}, {n: "Ewedu-Gbegiri 🍲", p: 500}
+        ],
+        "Proteins 🥩": [
+            {n: "Meat (Per Piece) 🥩", p: 500}, {n: "Turkey 🦃", p: 3500}, {n: "Chicken 🐓", p: 2000},
+            {n: "Ponmo 🍖", p: 500}, {n: "Egg 🥚", p: 400}, {n: "Fish (Large) 🐠", p: 2000}, {n: "Fish (Medium) 🐠", p: 1500}
+        ],
+        "Elite Combos 🔥": [
+            {n: "Suya Rice + Shredded Beef", p: 4500}, 
+            {n: "Yam & Fish Sauce", p: 5500}, 
+            {n: "Yam & Egg Sauce", p: 5500},
+            {n: "Fried Egg & Plantain", p: 7500},
+            {n: "Pepper Soup Deluxe 🥣", p: 7500}
+        ],
+        "Sides 🍱": [
+            {n: "Red Stew 🍲", p: 0}, {n: "Green Stew 🍲", p: 0}, {n: "Takeaway Plate 🍱", p: 300}
+        ]
+    };
+
+    let tray = [];
+    const phone = "2348168543377";
+
+    // Create Floating Emojis
+    function createEmojis() {
+        const icons = ['🍲', '🍗', '🌾', '🔥', '🥘', '🌶️', '🥩'];
+        const container = document.getElementById('emoji-container');
+        setInterval(() => {
+            const emoji = document.createElement('div');
+            emoji.className = 'floating-emoji';
+            emoji.innerText = icons[Math.floor(Math.random() * icons.length)];
+            emoji.style.left = Math.random() * 100 + 'vw';
+            emoji.style.animation = `float ${5 + Math.random() * 5}s linear forwards`;
+            container.appendChild(emoji);
+            setTimeout(() => emoji.remove(), 10000);
+        }, 2000);
+    }
+
+    function init() {
+        const target = document.getElementById('menu-sections');
+        for (let cat in fullMenu) {
+            let html = `<h2 class="category-title">${cat}</h2><div class="menu-grid">`;
+            fullMenu[cat].forEach(item => {
+                html += `
+                    <div class="food-card">
+                        <div>
+                            <div class="food-name">${item.n}</div>
+                            <div class="food-price">${item.p > 0 ? '₦' + item.p.toLocaleString() : 'FREE'}</div>
+                        </div>
+                        <button class="btn-add" onclick="add('${item.n}', ${item.p})">ADD TO TRAY +</button>
+                    </div>
+                `;
+            });
+            html += `</div>`;
+            target.innerHTML += html;
+        }
+        createEmojis();
+    }
+
+    function toggleCart() { document.getElementById('cart-panel').classList.toggle('active'); }
+
+    function add(n, p) {
+        tray.push({n, p, id: Date.now()});
+        updateTray();
+        // Shake effect on tray button
+        const btn = document.querySelector('.cart-toggle');
+        btn.style.transform = "scale(1.2)";
+        setTimeout(() => btn.style.transform = "scale(1)", 200);
+    }
+
+    function remove(id) {
+        tray = tray.filter(i => i.id !== id);
+        updateTray();
+    }
+
+    function updateTray() {
+        const list = document.getElementById('cart-items');
+        const count = document.getElementById('cart-count');
+        const total = document.getElementById('cart-total');
+        count.innerText = tray.length;
+        if(tray.length === 0) {
+            list.innerHTML = '<p style="text-align:center; color:#999; margin-top:50px; font-size:1.2rem;">Your tray is empty. Feed me! 😋</p>';
+            total.innerText = "0";
+            return;
+        }
+        let sum = 0;
+        list.innerHTML = "";
+        tray.forEach(i => {
+            sum += i.p;
+            list.innerHTML += `
+                <div class="cart-item">
+                    <span style="font-weight:800;">${i.n}</span>
+                    <button style="color:red; border:2px solid red; background:none; border-radius:10px; cursor:pointer; padding:5px 10px;" onclick="remove(${i.id})">REMOVE</button>
+                </div>
+            `;
+        });
+        total.innerText = sum.toLocaleString();
+    }
+
+    function sendOrder() {
+        if(tray.length === 0) return alert("Your tray is empty!");
+        let msg = "Hello Blessed 9ra! I want to order:%0A%0A";
+        tray.forEach(i => msg += `- ${i.n}%0A`);
+        msg += `%0A*TOTAL AMOUNT: ₦${document.getElementById('cart-total').innerText}*%0A%0APlease confirm my order!`;
+        window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+    }
+
+    window.onload = init;
+</script>
+
+</body>
+</html>
