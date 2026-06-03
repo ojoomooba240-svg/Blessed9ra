@@ -5,156 +5,240 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blessed 9ra | The Live Experience</title>
     <meta name="google-site-verification" content="qoJWJyWsKBZV6BA8FE9Q8_R3tFo5AUHz_Imo07UtSM4" />
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Poppins:wght@400;600;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Poppins:wght@300;400;600;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --brand-green: #2e7d32;
             --brand-orange: #ff6d00;
             --honey: #ffc107;
-            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.1);
+            --dark-glass: rgba(0, 0, 0, 0.6);
         }
 
-        /* Animated Shifting Background */
+        /* Animated Liquid Background */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            color: white;
+            background: linear-gradient(-45deg, #1b5e20, #2e7d32, #e65100, #bf360c);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            background: linear-gradient(-45deg, #fff8e1, #e8f5e9, #fff3e0, #f1f8e9);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            color: #1a1a1a;
-            overflow-x: hidden;
-        }
-
-        /* Float Animation for Emojis */
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); opacity: 0; }
-            50% { opacity: 0.8; }
-            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
-        }
-
-        .floating-emoji {
-            position: fixed;
-            bottom: -50px;
-            font-size: 2rem;
-            z-index: -1;
-            user-select: none;
-            pointer-events: none;
-        }
-
-        /* Header with Glow */
+        /* Header Styles */
         header { 
-            background: linear-gradient(135deg, #1b5e20, #2e7d32);
-            color: white; padding: 100px 20px; text-align: center;
-            border-bottom: 8px solid var(--honey);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            position: relative;
+            padding: 80px 20px;
+            text-align: center;
+            background: var(--dark-glass);
+            backdrop-filter: blur(15px);
+            border-bottom: 5px solid var(--honey);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         header h1 { 
             font-family: 'Bungee', cursive; 
-            font-size: clamp(2.5rem, 8vw, 4.5rem); 
-            margin: 0; 
+            font-size: clamp(2.5rem, 10vw, 5rem); 
+            margin: 0;
             color: var(--honey);
             text-shadow: 5px 5px 0 var(--brand-orange);
-            filter: drop-shadow(0 0 15px rgba(255, 193, 7, 0.5));
+            letter-spacing: 2px;
+            animation: titlePulse 2s infinite alternate;
         }
 
-        /* Lively Cards */
-        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
-        
-        .category-title { 
-            font-family: 'Bungee', cursive; font-size: 2.2rem; color: var(--brand-green); 
-            margin-bottom: 30px; text-align: center;
-            text-decoration: underline wavy var(--honey);
+        @keyframes titlePulse {
+            from { transform: scale(1); filter: drop-shadow(0 0 5px var(--honey)); }
+            to { transform: scale(1.02); filter: drop-shadow(0 0 20px var(--brand-orange)); }
         }
 
-        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        
-        .food-card { 
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(5px);
-            border-radius: 35px; padding: 30px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-            display: flex; flex-direction: column; 
-            justify-content: space-between;
-            border: 3px solid transparent;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .food-card:hover { 
-            transform: translateY(-20px) scale(1.05) rotate(1deg); 
-            border-color: var(--brand-orange);
+        .service-banner {
             background: white;
-            box-shadow: 0 25px 50px rgba(255, 109, 0, 0.15);
+            color: var(--brand-green);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 900;
+            display: inline-block;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: slideUp 1s ease-out;
         }
 
-        .food-name { font-weight: 900; font-size: 1.4rem; margin-bottom: 10px; color: #333; }
-        .food-price { color: var(--brand-green); font-weight: 900; font-size: 1.5rem; margin-bottom: 20px; background: #e8f5e9; display: inline-block; padding: 5px 15px; border-radius: 50px; }
+        /* Menu Grid & Cards */
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+
+        .category-title { 
+            font-family: 'Bungee', cursive;
+            font-size: 2rem;
+            margin: 60px 0 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .category-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--honey);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        .menu-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 30px; 
+        }
+
+        .food-card { 
+            background: rgba(255, 255, 255, 0.95);
+            color: #1a1a1a;
+            border-radius: 30px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,255,255,0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .food-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            background: white;
+            box-shadow: 0 25px 50px rgba(255, 109, 0, 0.3);
+        }
+
+        .food-name { font-weight: 900; font-size: 1.2rem; color: var(--brand-green); }
+        .food-price { font-weight: 900; font-size: 1.5rem; color: var(--brand-orange); margin: 10px 0; }
 
         .btn-add { 
-            background: var(--brand-green); color: white; border: none; 
-            padding: 15px; border-radius: 20px; font-weight: 900; cursor: pointer;
-            font-size: 1.1rem;
-            box-shadow: 0 8px 0 #1b5e20;
+            background: linear-gradient(45deg, var(--brand-green), #43a047);
+            color: white; border: none; width: 100%;
+            padding: 15px; border-radius: 20px; font-weight: 900; 
+            cursor: pointer; transition: 0.3s;
+            text-transform: uppercase; letter-spacing: 1px;
         }
 
-        .btn-add:active { transform: translateY(4px); box-shadow: 0 4px 0 #1b5e20; }
+        .btn-add:active { transform: scale(0.95); }
 
-        /* Cart Pulse */
+        /* Cart Floating Button */
         .cart-toggle { 
-            position: fixed; bottom: 30px; right: 30px; background: var(--brand-orange); 
-            color: white; padding: 25px 45px; border-radius: 100px; 
-            cursor: pointer; font-weight: 900; z-index: 2000; 
-            box-shadow: 0 10px 30px rgba(255, 109, 0, 0.4);
+            position: fixed; bottom: 30px; right: 30px; 
+            background: var(--brand-orange);
+            color: white; padding: 20px 35px; border-radius: 100px;
+            cursor: pointer; font-weight: 900; z-index: 2000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             border: 4px solid var(--honey);
+            transition: 0.3s;
         }
 
+        .cart-toggle:hover { transform: scale(1.1); }
+
+        /* Side Panel (Glassmorphism) */
         #cart-panel { 
-            position: fixed; top: 0; right: -450px; width: 420px; height: 100%; 
-            background: white; z-index: 3000; padding: 40px; 
+            position: fixed; top: 0; right: -100%; width: 100%; max-width: 450px; height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            color: #1a1a1a; z-index: 3000; padding: 40px;
             transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            box-shadow: -10px 0 50px rgba(0,0,0,0.3);
             display: flex; flex-direction: column;
         }
+
         #cart-panel.active { right: 0; }
 
-        .btn-checkout { 
-            background: #25d366; color: white; border: none; width: 100%; 
-            padding: 22px; border-radius: 25px; font-weight: 900; font-size: 1.4rem; 
-            cursor: pointer; margin-top: 20px;
+        .cart-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 0; border-bottom: 2px dashed #ddd;
+            animation: fadeIn 0.5s ease;
         }
 
-        footer { background: #1b5e20; color: white; text-align: center; padding: 80px 20px; border-top: 15px solid var(--honey); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .btn-unpick {
+            background: #ffebee; color: #d32f2f; border: 2px solid #d32f2f;
+            padding: 8px 15px; border-radius: 12px; font-weight: 800; cursor: pointer;
+        }
+
+        /* Payment Modal */
+        #payment-modal {
+            display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 90%; max-width: 400px; background: white; color: #1a1a1a;
+            padding: 40px; border-radius: 40px; z-index: 5000; text-align: center;
+            box-shadow: 0 0 100px rgba(0,0,0,0.5);
+            border: 8px solid var(--brand-orange);
+            animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes modalPop {
+            from { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+            to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+
+        .bank-card {
+            background: #f8f9fa; padding: 25px; border-radius: 25px; 
+            margin: 20px 0; border: 2px dashed var(--brand-green);
+        }
+
+        .btn-whatsapp { 
+            background: #25d366; color: white; border: none; width: 100%;
+            padding: 20px; border-radius: 20px; font-weight: 900; font-size: 1.2rem;
+            cursor: pointer; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        footer { 
+            background: var(--dark-glass); padding: 60px 20px; text-align: center; 
+            border-top: 10px solid var(--honey); 
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--honey); border-radius: 10px; }
+
     </style>
 </head>
 <body>
 
-<div id="emoji-container"></div>
+<div class="cart-toggle" onclick="toggleCart()">🛒 TRAY (<span id="cart-count">0</span>)</div>
 
-<div class="cart-toggle" onclick="toggleCart()">🛒 MY FOOD TRAY (<span id="cart-count">0</span>)</div>
+<div id="payment-modal">
+    <h2 style="font-family:'Bungee'; color:var(--brand-green);">TRANSFER TO:</h2>
+    <div class="bank-card">
+        <h1 style="margin:0; font-size:2.2rem; color:var(--brand-orange); letter-spacing:2px;">5391538148</h1>
+        <p style="margin:5px 0; font-weight:900;">Moniepoint</p>
+        <p style="margin:0; font-size:0.9rem;">Account: <b>Blessed9ra</b></p>
+    </div>
+    <button class="btn-whatsapp" onclick="sendOrder()">SEND PROOF TO WHATSAPP 🚀</button>
+    <p onclick="closePayment()" style="margin-top:20px; cursor:pointer; text-decoration:underline;">Go Back</p>
+</div>
 
 <div id="cart-panel">
     <div style="display:flex; justify-content:space-between; align-items:center;">
-        <h2 style="font-family:'Bungee'; color:var(--brand-green); font-size:2rem;">TRAY</h2>
+        <h2 style="font-family:'Bungee'; color:var(--brand-green); margin:0;">YOUR TRAY</h2>
         <button onclick="toggleCart()" style="border:none; background:none; font-size:3rem; cursor:pointer;">&times;</button>
     </div>
     <div id="cart-items" style="flex-grow:1; overflow-y:auto; margin: 30px 0;"></div>
-    <div style="border-top:8px solid var(--honey); padding-top:20px;">
-        <div style="display:flex; justify-content:space-between; font-weight:900; font-size:2rem;">
-            <span>TOTAL:</span><span>₦<span id="cart-total">0</span></span>
-        </div>
-        <button class="btn-checkout" onclick="sendOrder()">ORDER VIA WHATSAPP 🚀</button>
+    <div style="border-top:5px solid var(--honey); padding-top:20px;">
+        <h3 style="display:flex; justify-content:space-between; font-size:1.8rem; margin-bottom:20px;">TOTAL: <span>₦<span id="cart-total">0</span></span></h3>
+        <button class="btn-whatsapp" style="background:var(--brand-green)" onclick="openPayment()">PAY & ORDER 💳</button>
     </div>
 </div>
 
 <header>
     <h1>BLESSED 9RA</h1>
-    <p style="font-weight: 900; font-size: 1.3rem; letter-spacing: 2px;">THE TASTE OF PERFECTION • 24/7 LIVE KITCHEN</p>
+    <div class="service-banner">Indoor & Outdoor Services Available</div>
 </header>
 
 <div class="container">
@@ -162,126 +246,102 @@
 </div>
 
 <footer>
-    <p style="font-weight:900; font-size:2rem; color:var(--honey); margin-bottom: 10px;">BLESSED 9RA DELICACIES</p>
-    <p>📍 Ilishan-Remo, Ogun State</p>
-    <p>📞 +234 816 854 3377 | +234 802 810 7074</p>
+    <h3 style="font-family:'Bungee'; color:var(--honey); margin:0;">BLESSED 9RA DELICACIES</h3>
+    <p style="font-size:1.5rem; font-weight:800; margin:15px 0;">📞 08168543377</p>
+    <p style="opacity:0.7;">Quality Food for Blessed People</p>
 </footer>
 
 <script>
-    const fullMenu = {
-        "The Staples 🌾": [
-            {n: "White Rice (Scoop) 🌾", p: 400}, {n: "Jollof Rice (Scoop) 🌾", p: 400}, 
-            {n: "Beans (Scoop) 🫘", p: 400}, {n: "Plantain 🌱", p: 500}
+    const menuData = {
+        "Main Dishes 🥘": [
+            {n: "White Rice 🌾", p: 400}, {n: "Jollof Rice 🌾", p: 400}, 
+            {n: "Beans 🫘", p: 400}, {n: "Plantain 🌱", p: 500},
+            {n: "Yamarita", p: 4500}, {n: "Jollof Spag w/ Chicken", p: 5000},
+            {n: "Noodles", p: 1800}, {n: "Agege Bread", p: 1000}
         ],
         "Swallow & Soups 🍛": [
-            {n: "Fufu 🍛", p: 400}, {n: "Amala 🍛", p: 400}, {n: "Poundo Yam 🍛", p: 400},
-            {n: "Egusi Soup (Scoop) 🍲", p: 600}, {n: "Efo Riro (Scoop) 🍲", p: 600}, {n: "Ewedu-Gbegiri 🍲", p: 500}
+            {n: "Fufu / Amala / Poundo", p: 400},
+            {n: "Egusi / Efo Riro 🍲", p: 600}, {n: "Ewedu-Gbegiri 🍲", p: 500},
+            {n: "Moinmoin", p: 500}
         ],
-        "Proteins 🥩": [
-            {n: "Meat (Per Piece) 🥩", p: 500}, {n: "Turkey 🦃", p: 3500}, {n: "Chicken 🐓", p: 2000},
-            {n: "Ponmo 🍖", p: 500}, {n: "Egg 🥚", p: 400}, {n: "Fish (Large) 🐠", p: 2000}, {n: "Fish (Medium) 🐠", p: 1500}
+        "Proteins & Extras 🥩": [
+            {n: "Beef Meat 🥩", p: 500}, {n: "Goat Meat 🍖", p: 3000}, {n: "Turkey 🦃", p: 3500}, 
+            {n: "Chicken 🐓", p: 2000}, {n: "Chicken n Chips 🍟", p: 5000}, {n: "Ponmo 🍖", p: 500}, 
+            {n: "Egg 🥚", p: 400}, {n: "Coleslaw", p: 1500}, {n: "Takeaway Plate 🍱", p: 300}
         ],
-        "Elite Combos 🔥": [
-            {n: "Suya Rice + Shredded Beef", p: 4500}, 
-            {n: "Yam & Fish Sauce", p: 5500}, 
-            {n: "Yam & Egg Sauce", p: 5500},
-            {n: "Fried Egg & Plantain", p: 7500},
-            {n: "Pepper Soup Deluxe 🥣", p: 7500}
+        "Premium Plates 🔥": [
+            {n: "Suya Rice w/ Beef", p: 4500}, {n: "Yam & Egg Sauce", p: 5500}, 
+            {n: "Fried Egg & Plantain", p: 7500}, {n: "Pepper Soup 🥣", p: 7500}
         ],
-        "Sides 🍱": [
-            {n: "Red Stew 🍲", p: 0}, {n: "Green Stew 🍲", p: 0}, {n: "Takeaway Plate 🍱", p: 300}
+        "Snacks & Treats 🍦": [
+            {n: "Small Chops 🥟", p: 3500}, {n: "Milky Doughnut 🍩", p: 4500}, 
+            {n: "Parfait 🍨", p: 4500}, {n: "Popcorn 🍿", p: 500},
+            {n: "Ice Cream (Sizes Differ)", p: 0}
+        ],
+        "Refreshing Drinks 🍷": [
+            {n: "Zobo 🍷", p: 500}, {n: "Tiger Nut Milk 🥛", p: 1500}
         ]
     };
 
     let tray = [];
-    const phone = "2348168543377";
-
-    // Create Floating Emojis
-    function createEmojis() {
-        const icons = ['🍲', '🍗', '🌾', '🔥', '🥘', '🌶️', '🥩'];
-        const container = document.getElementById('emoji-container');
-        setInterval(() => {
-            const emoji = document.createElement('div');
-            emoji.className = 'floating-emoji';
-            emoji.innerText = icons[Math.floor(Math.random() * icons.length)];
-            emoji.style.left = Math.random() * 100 + 'vw';
-            emoji.style.animation = `float ${5 + Math.random() * 5}s linear forwards`;
-            container.appendChild(emoji);
-            setTimeout(() => emoji.remove(), 10000);
-        }, 2000);
-    }
+    const phone = "08168543377";
 
     function init() {
         const target = document.getElementById('menu-sections');
-        for (let cat in fullMenu) {
+        for (let cat in menuData) {
             let html = `<h2 class="category-title">${cat}</h2><div class="menu-grid">`;
-            fullMenu[cat].forEach(item => {
+            menuData[cat].forEach(item => {
                 html += `
                     <div class="food-card">
                         <div>
                             <div class="food-name">${item.n}</div>
-                            <div class="food-price">${item.p > 0 ? '₦' + item.p.toLocaleString() : 'FREE'}</div>
+                            <div class="food-price">${item.p > 0 ? '₦' + item.p.toLocaleString() : 'Inquire Price'}</div>
                         </div>
-                        <button class="btn-add" onclick="add('${item.n}', ${item.p})">ADD TO TRAY +</button>
-                    </div>
-                `;
+                        <button class="btn-add" onclick="addToTray('${item.n}', ${item.p})">ADD TO TRAY +</button>
+                    </div>`;
             });
             html += `</div>`;
             target.innerHTML += html;
         }
-        createEmojis();
+    }
+
+    function addToTray(name, price) {
+        tray.push({ name, price, id: Date.now() });
+        updateTrayUI();
+    }
+
+    function unpick(id) {
+        tray = tray.filter(item => item.id !== id);
+        updateTrayUI();
+    }
+
+    function updateTrayUI() {
+        const list = document.getElementById('cart-items');
+        document.getElementById('cart-count').innerText = tray.length;
+        let sum = 0; list.innerHTML = "";
+        tray.forEach(i => {
+            sum += i.price;
+            list.innerHTML += `
+                <div class="cart-item">
+                    <div><b>${i.n}</b><br><span style="color:var(--brand-orange)">₦${i.price.toLocaleString()}</span></div>
+                    <button class="btn-unpick" onclick="unpick(${i.id})">REMOVE</button>
+                </div>`;
+        });
+        document.getElementById('cart-total').innerText = sum.toLocaleString();
     }
 
     function toggleCart() { document.getElementById('cart-panel').classList.toggle('active'); }
-
-    function add(n, p) {
-        tray.push({n, p, id: Date.now()});
-        updateTray();
-        // Shake effect on tray button
-        const btn = document.querySelector('.cart-toggle');
-        btn.style.transform = "scale(1.2)";
-        setTimeout(() => btn.style.transform = "scale(1)", 200);
-    }
-
-    function remove(id) {
-        tray = tray.filter(i => i.id !== id);
-        updateTray();
-    }
-
-    function updateTray() {
-        const list = document.getElementById('cart-items');
-        const count = document.getElementById('cart-count');
-        const total = document.getElementById('cart-total');
-        count.innerText = tray.length;
-        if(tray.length === 0) {
-            list.innerHTML = '<p style="text-align:center; color:#999; margin-top:50px; font-size:1.2rem;">Your tray is empty. Feed me! 😋</p>';
-            total.innerText = "0";
-            return;
-        }
-        let sum = 0;
-        list.innerHTML = "";
-        tray.forEach(i => {
-            sum += i.p;
-            list.innerHTML += `
-                <div class="cart-item">
-                    <span style="font-weight:800;">${i.n}</span>
-                    <button style="color:red; border:2px solid red; background:none; border-radius:10px; cursor:pointer; padding:5px 10px;" onclick="remove(${i.id})">REMOVE</button>
-                </div>
-            `;
-        });
-        total.innerText = sum.toLocaleString();
-    }
+    function openPayment() { document.getElementById('payment-modal').style.display = 'block'; }
+    function closePayment() { document.getElementById('payment-modal').style.display = 'none'; }
 
     function sendOrder() {
         if(tray.length === 0) return alert("Your tray is empty!");
-        let msg = "Hello Blessed 9ra! I want to order:%0A%0A";
+        let msg = "Blessed 9ra Order Summary:%0A";
         tray.forEach(i => msg += `- ${i.n}%0A`);
-        msg += `%0A*TOTAL AMOUNT: ₦${document.getElementById('cart-total').innerText}*%0A%0APlease confirm my order!`;
-        window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+        msg += `%0A*TOTAL: ₦${document.getElementById('cart-total').innerText}*%0A%0A*Moniepoint Paid*`;
+        window.open(`https://wa.me/234${phone.substring(1)}?text=${msg}`, '_blank');
     }
-
     window.onload = init;
 </script>
-
 </body>
 </html>
