@@ -7,6 +7,14 @@
     <meta name="google-site-verification" content="qoJWJyWsKBZV6BA8FE9Q8_R3tFo5AUHz_Imo07UtSM4" />
     <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Poppins:wght@300;400;600;900&display=swap" rel="stylesheet">
     <style>
+        .menu-grid { 
+    display: grid; 
+    /* This automatically adds or removes columns depending on the device size */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 20px; 
+    width: 100%;
+    box-sizing: border-box;
+}
         :root {
             --brand-green: #2e7d32;
             --brand-orange: #ff6d00;
@@ -206,6 +214,21 @@
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: var(--honey); border-radius: 10px; }
+        /* Rules specifically for mobile screens smaller than 600px wide */
+@media (max-width: 600px) {
+    header h1 { 
+        font-size: 2.2rem; /* Shrinks the title so it doesn't spill off the phone screen */
+    }
+    
+    #cart-panel { 
+        width: 100%; /* Makes the side tray panel full screen on mobile for easy viewing */
+        max-width: 100%; 
+    }
+    
+    .container {
+        padding: 10px; /* Gives less padding so the cards have more room */
+    }
+}
 
     </style>
 </head>
