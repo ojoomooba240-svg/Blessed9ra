@@ -308,6 +308,7 @@
 
     function init() {
         const target = document.getElementById('menu-sections');
+        target.innerHTML = ""; // Clear existing contents
         for (let cat in menuData) {
             let html = `<h2 class="category-title">${cat}</h2><div class="menu-grid">`;
             menuData[cat].forEach(item => {
@@ -317,7 +318,7 @@
                             <div class="food-name">${item.n}</div>
                             <div class="food-price">${item.p > 0 ? '₦' + item.p.toLocaleString() : 'Inquire Price'}</div>
                         </div>
-                        <button class="btn-add" onclick="addToTray('${item.n}', ${item.p})">ADD TO TRAY +</button>
+                        <button class="btn-add" onclick="addToTray('${item.n.replace(/'/g, "\\'")}', ${item.p})">ADD TO TRAY +</button>
                     </div>`;
             });
             html += `</div>`;
@@ -326,7 +327,7 @@
     }
 
     function addToTray(name, price) {
-        tray.push({ name, price, id: Date.now() });
+        tray.push({ name: name, price: price, id: Date.now() });
         updateTrayUI();
     }
 
@@ -338,7 +339,9 @@
     function updateTrayUI() {
         const list = document.getElementById('cart-items');
         document.getElementById('cart-count').innerText = tray.length;
-        let sum = 0; list.innerHTML = "";
+        let sum = 0; 
+        list.innerHTML = "";
+        
         tray.forEach(i => {
             sum += i.price;
             list.innerHTML += `
@@ -358,7 +361,7 @@
         if(tray.length === 0) return alert("Your tray is empty!");
         let msg = "Blessed 9ra Order Summary:%0A";
         tray.forEach(i => msg += `- ${i.name}%0A`);
-        msg += `%0A*TOTAL: ₦${document.getElementById('cart-total').innerText}*%0A%0A*Moniepoint Paid*`;
+        msg += `%0A*TOTAL: ₦${document.getElementById('cart-total').innerText}*%0A%0A*Paid to Moniepoint Account*`;
         window.open(`https://wa.me/234${phone.substring(1)}?text=${msg}`, '_blank');
     }
     window.onload = init;
