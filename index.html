@@ -9,7 +9,6 @@
     <style>
         .menu-grid { 
     display: grid; 
-    /* This automatically adds or removes columns depending on the device size */
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
     gap: 20px; 
     width: 100%;
@@ -77,10 +76,13 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             animation: slideUp 1s ease-out;
         }
-
-        /* Menu Grid & Cards */
-        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
-
+        .container { 
+            width: 100%; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 20px; 
+            box-sizing: border-box; 
+       }
         .category-title { 
             font-family: 'Bungee', cursive;
             font-size: 2rem;
@@ -221,12 +223,13 @@
     }
     
     #cart-panel { 
-        width: 100%; /* Makes the side tray panel full screen on mobile for easy viewing */
+        width: 100%; 
         max-width: 100%; 
+        right: -100%;
     }
     
     .container {
-        padding: 10px; /* Gives less padding so the cards have more room */
+        padding: 10px; 
     }
 }
 
