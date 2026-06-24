@@ -2,125 +2,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blessed 9ra | Live Experience</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Poppins:wght@400;600;900&display=swap" rel="stylesheet">
+    <title>Blessed 9ra | The Live Experience</title>
+    <meta name="google-site-verification" content="qoJWJyWsKBZV6BA8FE9Q8_R3tFo5AUHz_Imo07UtSM4" />
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Poppins:wght@300;400;600;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --brand-green: #2e7d32;
             --brand-orange: #ff6d00;
             --honey: #ffc107;
-            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.1);
+            --dark-glass: rgba(0, 0, 0, 0.6);
         }
 
-        @keyframes flow {
+        /* Animated Liquid Background */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            color: white;
+            background: linear-gradient(-45deg, #1b5e20, #2e7d32, #e65100, #bf360c);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            background: linear-gradient(-45deg, #1b5e20, #2e7d32, #ff6d00, #e65100);
-            background-size: 400% 400%;
-            animation: flow 15s ease infinite;
-            color: white;
-            overflow-x: hidden;
-        }
-
+        /* Header Styles */
         header { 
-            padding: 50px 15px; text-align: center;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(10px);
-            border-bottom: 6px solid var(--honey);
+            padding: 80px 20px;
+            text-align: center;
+            background: var(--dark-glass);
+            backdrop-filter: blur(15px);
+            border-bottom: 5px solid var(--honey);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         header h1 { 
             font-family: 'Bungee', cursive; 
-            font-size: clamp(2rem, 10vw, 4rem); 
-            margin: 0; color: var(--honey);
-            text-shadow: 3px 3px 0 var(--brand-orange);
+            font-size: clamp(2.5rem, 10vw, 5rem); 
+            margin: 0;
+            color: var(--honey);
+            text-shadow: 5px 5px 0 var(--brand-orange);
+            letter-spacing: 2px;
+            animation: titlePulse 2s infinite alternate;
+        }
+
+        @keyframes titlePulse {
+            from { transform: scale(1); filter: drop-shadow(0 0 5px var(--honey)); }
+            to { transform: scale(1.02); filter: drop-shadow(0 0 20px var(--brand-orange)); }
         }
 
         .service-banner {
-            background: var(--honey);
+            background: white;
             color: var(--brand-green);
-            padding: 8px 20px;
+            padding: 10px 25px;
             border-radius: 50px;
             font-weight: 900;
             display: inline-block;
-            margin-top: 15px;
-            font-size: 0.9rem;
-            text-transform: uppercase;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px; box-sizing: border-box; }
-        
+        .container { 
+            width: 100%; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 20px; 
+            box-sizing: border-box; 
+        }
+
         .category-title { 
-            font-family: 'Bungee', cursive; font-size: clamp(1.4rem, 5vw, 2rem); 
-            text-align: center; margin: 40px 0 20px; color: var(--white);
+            font-family: 'Bungee', cursive;
+            font-size: 2rem;
+            margin: 60px 0 30px;
+            text-align: center;
+            position: relative;
         }
 
+        .category-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--honey);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        /* Fixed CSS Grid layout */
         .menu-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-            gap: 20px; 
+            gap: 30px; 
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .food-card { 
-            background: rgba(255, 255, 255, 0.98); color: #1a1a1a;
-            border-radius: 25px; padding: 20px; 
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            display: flex; flex-direction: column; justify-content: space-between;
-            transition: 0.3s ease;
+            background: rgba(255, 255, 255, 0.95);
+            color: #1a1a1a;
+            border-radius: 30px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,255,255,0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        .food-card:hover { transform: translateY(-5px); }
+        .food-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            background: white;
+            box-shadow: 0 25px 50px rgba(255, 109, 0, 0.3);
+        }
 
-        .food-name { font-weight: 900; font-size: 1.1rem; color: var(--brand-green); }
-        .food-price { font-weight: 900; font-size: 1.3rem; color: var(--brand-orange); margin: 10px 0; }
+        .food-name { font-weight: 900; font-size: 1.2rem; color: var(--brand-green); }
+        .food-price { font-weight: 900; font-size: 1.5rem; color: var(--brand-orange); margin: 10px 0; }
 
         .btn-add { 
-            background: var(--brand-green); color: white; border: none; width: 100%;
-            padding: 12px; border-radius: 15px; font-weight: 900; cursor: pointer;
+            background: linear-gradient(45deg, var(--brand-green), #43a047);
+            color: white; border: none; width: 100%;
+            padding: 15px; border-radius: 20px; font-weight: 900; 
+            cursor: pointer; transition: 0.3s;
+            text-transform: uppercase; letter-spacing: 1px;
         }
 
+        .btn-add:active { transform: scale(0.95); }
+
+        /* Cart Floating Button */
         .cart-toggle { 
-            position: fixed; bottom: 20px; right: 20px; background: var(--brand-orange); 
-            color: white; padding: 15px 25px; border-radius: 50px; 
-            cursor: pointer; font-weight: 900; z-index: 2000; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4); border: 3px solid var(--honey);
+            position: fixed; bottom: 30px; right: 30px; 
+            background: var(--brand-orange);
+            color: white; padding: 20px 35px; border-radius: 100px;
+            cursor: pointer; font-weight: 900; z-index: 2000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 4px solid var(--honey);
+            transition: 0.3s;
         }
 
+        .cart-toggle:hover { transform: scale(1.1); }
+
+        /* Side Panel (Glassmorphism) */
         #cart-panel { 
-            position: fixed; top: 0; right: -100%; width: 100%; max-width: 400px; height: 100%; 
-            background: white; color: #1a1a1a; z-index: 3000; padding: 25px; 
-            transition: 0.4s ease; display: flex; flex-direction: column;
+            position: fixed; top: 0; right: -100%; width: 100%; max-width: 450px; height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            color: #1a1a1a; z-index: 3000; padding: 40px;
+            transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            box-shadow: -10px 0 50px rgba(0,0,0,0.3);
+            display: flex; flex-direction: column;
         }
+
         #cart-panel.active { right: 0; }
 
         .cart-item {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 12px 0; border-bottom: 1px dashed #ccc;
+            padding: 15px 0; border-bottom: 2px dashed #ddd;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         .btn-unpick {
-            background: #ffeded; color: #d32f2f; border: 1px solid #d32f2f;
-            padding: 6px 12px; border-radius: 8px; font-weight: 800; cursor: pointer;
+            background: #ffebee; color: #d32f2f; border: 2px solid #d32f2f;
+            padding: 8px 15px; border-radius: 12px; font-weight: 800; cursor: pointer;
         }
 
+        /* Payment Modal */
         #payment-modal {
             display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 90%; max-width: 380px; background: white; color: #1a1a1a;
-            padding: 25px; border-radius: 30px; z-index: 5000; text-align: center;
-            border: 6px solid var(--brand-orange);
+            width: 90%; max-width: 400px; background: white; color: #1a1a1a;
+            padding: 40px; border-radius: 40px; z-index: 5000; text-align: center;
+            box-shadow: 0 0 100px rgba(0,0,0,0.5);
+            border: 8px solid var(--brand-orange);
+            animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .bank-info { background: #f4f4f4; padding: 15px; border-radius: 15px; margin: 15px 0; }
+        @keyframes modalPop {
+            from { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+            to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
 
-        .btn-whatsapp { background: #25d366; color: white; border: none; width: 100%; padding: 15px; border-radius: 12px; font-weight: 900; font-size: 1.1rem; cursor: pointer; }
+        .bank-card {
+            background: #f8f9fa; padding: 25px; border-radius: 25px; 
+            margin: 20px 0; border: 2px dashed var(--brand-green);
+        }
 
-        footer { background: rgba(0,0,0,0.9); padding: 40px 15px; text-align: center; border-top: 6px solid var(--honey); }
+        .btn-whatsapp { 
+            background: #25d366; color: white; border: none; width: 100%;
+            padding: 20px; border-radius: 20px; font-weight: 900; font-size: 1.2rem;
+            cursor: pointer; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        footer { 
+            background: var(--dark-glass); padding: 60px 20px; text-align: center; 
+            border-top: 10px solid var(--honey); 
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--honey); border-radius: 10px; }
+
+        /* Responsive Breakpoint Mobile adjustment */
+        @media (max-width: 600px) {
+            header h1 { 
+                font-size: 2.2rem; 
+            }
+            #cart-panel { 
+                width: 100%; 
+                max-width: 100%; 
+            }
+            .container {
+                padding: 10px; 
+            }
+        }
     </style>
 </head>
 <body>
@@ -128,25 +233,25 @@
 <div class="cart-toggle" onclick="toggleCart()">🛒 TRAY (<span id="cart-count">0</span>)</div>
 
 <div id="payment-modal">
-    <h2 style="font-family:'Bungee';">PAYMENT INFO</h2>
-    <div class="bank-info">
-        <h2 style="margin:0; color:var(--brand-orange);">5391538148</h2>
-        <p style="margin:5px 0;"><b>Moniepoint</b></p>
-        <p style="margin:0; font-size:0.9rem;">Account Name: Blessed9ra</p>
+    <h2 style="font-family:'Bungee'; color:var(--brand-green);">TRANSFER TO:</h2>
+    <div class="bank-card">
+        <h1 style="margin:0; font-size:2.2rem; color:var(--brand-orange); letter-spacing:2px;">5391538148</h1>
+        <p style="margin:5px 0; font-weight:900;">Moniepoint</p>
+        <p style="margin:0; font-size:0.9rem;">Account: <b>Blessed9ra</b></p>
     </div>
-    <button class="btn-whatsapp" onclick="sendOrder()">FINALIZE ON WHATSAPP 🚀</button>
-    <p onclick="closePayment()" style="margin-top:15px; cursor:pointer; text-decoration:underline;">Go Back</p>
+    <button class="btn-whatsapp" onclick="sendOrder()">SEND PROOF TO WHATSAPP 🚀</button>
+    <p onclick="closePayment()" style="margin-top:20px; cursor:pointer; text-decoration:underline;">Go Back</p>
 </div>
 
 <div id="cart-panel">
     <div style="display:flex; justify-content:space-between; align-items:center;">
-        <h2 style="font-family:'Bungee'; color:var(--brand-green); margin:0;">MY TRAY</h2>
-        <button onclick="toggleCart()" style="border:none; background:none; font-size:2rem; cursor:pointer;">&times;</button>
+        <h2 style="font-family:'Bungee'; color:var(--brand-green); margin:0;">YOUR TRAY</h2>
+        <button onclick="toggleCart()" style="border:none; background:none; font-size:3rem; cursor:pointer;">&times;</button>
     </div>
-    <div id="cart-items" style="flex-grow:1; overflow-y:auto; margin: 15px 0;"></div>
-    <div style="border-top:4px solid var(--honey); padding-top:15px;">
-        <h3 style="display:flex; justify-content:space-between; margin-bottom:15px;">TOTAL: <span>₦<span id="cart-total">0</span></span></h3>
-        <button class="btn-whatsapp" style="background:var(--brand-green)" onclick="openPayment()">PROCEED TO CHECKOUT 💳</button>
+    <div id="cart-items" style="flex-grow:1; overflow-y:auto; margin: 30px 0;"></div>
+    <div style="border-top:5px solid var(--honey); padding-top:20px;">
+        <h3 style="display:flex; justify-content:space-between; font-size:1.8rem; margin-bottom:20px;">TOTAL: <span>₦<span id="cart-total">0</span></span></h3>
+        <button class="btn-whatsapp" style="background:var(--brand-green)" onclick="openPayment()">PAY & ORDER 💳</button>
     </div>
 </div>
 
@@ -160,13 +265,14 @@
 </div>
 
 <footer>
-    <h3 style="font-family:'Bungee'; color:var(--honey); margin:0;">BLESSED 9RA</h3>
-    <p style="margin:10px 0;">📞 08168543377</p>
+    <h3 style="font-family:'Bungee'; color:var(--honey); margin:0;">BLESSED 9RA DELICACIES</h3>
+    <p style="font-size:1.5rem; font-weight:800; margin:15px 0;">📞 08168543377</p>
+    <p style="opacity:0.7;">Quality Food for Blessed People</p>
 </footer>
 
 <script>
     const menuData = {
-        "Main Dishes 🍱": [
+        "Main Dishes 🥘": [
             {n: "White Rice 🌾", p: 400}, {n: "Jollof Rice 🌾", p: 400}, 
             {n: "Beans 🫘", p: 400}, {n: "Plantain 🌱", p: 500},
             {n: "Yamarita", p: 4500}, {n: "Jollof Spag w/ Chicken", p: 5000},
@@ -201,6 +307,7 @@
 
     function init() {
         const target = document.getElementById('menu-sections');
+        target.innerHTML = ""; // Clear existing contents
         for (let cat in menuData) {
             let html = `<h2 class="category-title">${cat}</h2><div class="menu-grid">`;
             menuData[cat].forEach(item => {
@@ -208,9 +315,9 @@
                     <div class="food-card">
                         <div>
                             <div class="food-name">${item.n}</div>
-                            <div class="food-price">${item.p > 0 ? '₦' + item.p.toLocaleString() : 'Price Varies'}</div>
+                            <div class="food-price">${item.p > 0 ? '₦' + item.p.toLocaleString() : 'Inquire Price'}</div>
                         </div>
-                        <button class="btn-add" onclick="addToTray('${item.n}', ${item.p})">ADD TO TRAY +</button>
+                        <button class="btn-add" onclick="addToTray('${item.n.replace(/'/g, "\\'")}', ${item.p})">ADD TO TRAY +</button>
                     </div>`;
             });
             html += `</div>`;
@@ -219,7 +326,7 @@
     }
 
     function addToTray(name, price) {
-        tray.push({ name, price, id: Date.now() });
+        tray.push({ name: name, price: price, id: Date.now() });
         updateTrayUI();
     }
 
@@ -231,13 +338,15 @@
     function updateTrayUI() {
         const list = document.getElementById('cart-items');
         document.getElementById('cart-count').innerText = tray.length;
-        let sum = 0; list.innerHTML = "";
+        let sum = 0; 
+        list.innerHTML = "";
+        
         tray.forEach(i => {
             sum += i.price;
             list.innerHTML += `
                 <div class="cart-item">
-                    <div style="font-size:0.9rem;"><b>${i.n}</b><br>₦${i.price.toLocaleString()}</div>
-                    <button class="btn-unpick" onclick="unpick(${i.id})">UNPICK</button>
+                    <div><b>${i.name}</b><br><span style="color:var(--brand-orange)">₦${i.price.toLocaleString()}</span></div>
+                    <button class="btn-unpick" onclick="unpick(${i.id})">REMOVE</button>
                 </div>`;
         });
         document.getElementById('cart-total').innerText = sum.toLocaleString();
@@ -249,9 +358,9 @@
 
     function sendOrder() {
         if(tray.length === 0) return alert("Your tray is empty!");
-        let msg = "Hello Blessed 9ra! Here is my order:%0A";
+        let msg = "Blessed 9ra Order Summary:%0A";
         tray.forEach(i => msg += `- ${i.name}%0A`);
-        msg += `%0A*TOTAL: ₦${document.getElementById('cart-total').innerText}*%0A%0A*Moniepoint: 5391538148*`;
+        msg += `%0A*TOTAL: ₦${document.getElementById('cart-total').innerText}*%0A%0A*Paid to Moniepoint Account*`;
         window.open(`https://wa.me/234${phone.substring(1)}?text=${msg}`, '_blank');
     }
     window.onload = init;
