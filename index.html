@@ -7,13 +7,6 @@
     <meta name="google-site-verification" content="qoJWJyWsKBZV6BA8FE9Q8_R3tFo5AUHz_Imo07UtSM4" />
     <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Poppins:wght@300;400;600;900&display=swap" rel="stylesheet">
     <style>
-        .menu-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-    gap: 20px; 
-    width: 100%;
-    box-sizing: border-box;
-}
         :root {
             --brand-green: #2e7d32;
             --brand-orange: #ff6d00;
@@ -74,15 +67,16 @@
             display: inline-block;
             margin-top: 20px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            animation: slideUp 1s ease-out;
         }
+
         .container { 
             width: 100%; 
             max-width: 1200px; 
             margin: 0 auto; 
             padding: 20px; 
             box-sizing: border-box; 
-       }
+        }
+
         .category-title { 
             font-family: 'Bungee', cursive;
             font-size: 2rem;
@@ -101,10 +95,13 @@
             border-radius: 2px;
         }
 
+        /* Fixed CSS Grid layout */
         .menu-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
             gap: 30px; 
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .food-card { 
@@ -216,23 +213,20 @@
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: var(--honey); border-radius: 10px; }
-        /* Rules specifically for mobile screens smaller than 600px wide */
-@media (max-width: 600px) {
-    header h1 { 
-        font-size: 2.2rem; /* Shrinks the title so it doesn't spill off the phone screen */
-    }
-    
-    #cart-panel { 
-        width: 100%; 
-        max-width: 100%; 
-        right: -100%;
-    }
-    
-    .container {
-        padding: 10px; 
-    }
-}
 
+        /* Responsive Breakpoint Mobile adjustment */
+        @media (max-width: 600px) {
+            header h1 { 
+                font-size: 2.2rem; 
+            }
+            #cart-panel { 
+                width: 100%; 
+                max-width: 100%; 
+            }
+            .container {
+                padding: 10px; 
+            }
+        }
     </style>
 </head>
 <body>
@@ -349,7 +343,7 @@
             sum += i.price;
             list.innerHTML += `
                 <div class="cart-item">
-                    <div><b>${i.n}</b><br><span style="color:var(--brand-orange)">₦${i.price.toLocaleString()}</span></div>
+                    <div><b>${i.name}</b><br><span style="color:var(--brand-orange)">₦${i.price.toLocaleString()}</span></div>
                     <button class="btn-unpick" onclick="unpick(${i.id})">REMOVE</button>
                 </div>`;
         });
@@ -363,7 +357,7 @@
     function sendOrder() {
         if(tray.length === 0) return alert("Your tray is empty!");
         let msg = "Blessed 9ra Order Summary:%0A";
-        tray.forEach(i => msg += `- ${i.n}%0A`);
+        tray.forEach(i => msg += `- ${i.name}%0A`);
         msg += `%0A*TOTAL: ₦${document.getElementById('cart-total').innerText}*%0A%0A*Moniepoint Paid*`;
         window.open(`https://wa.me/234${phone.substring(1)}?text=${msg}`, '_blank');
     }
